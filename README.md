@@ -54,7 +54,7 @@ Once the first-time launch is complete, **you do NOT need to use the terminal ag
 ### 🍏 On macOS:
 1. Press <kbd>Cmd</kbd> + <kbd>Space</kbd> to open **Spotlight** (or open **Launchpad** / **Applications**).
 2. Type **`Seeker`** and press <kbd>Enter</kbd>.
-3. **Seeker** will launch automatically with the 5-second cinematic build-up animation and open the full automation dashboard.
+3. **Seeker** will launch automatically and open the full automation dashboard.
 
 ### 🪟 On Windows:
 1. Open your **Start Menu** or search **`Seeker`**.
@@ -67,7 +67,6 @@ Once the first-time launch is complete, **you do NOT need to use the terminal ag
 
 ## ✨ Features
 
-* **Cinematic 5-Second Startup Loader**: Smooth orbital build-up animation into the Seeker logo with real-time sandbox telemetry initialization.
 * **Smart Header Targeting**: Clicks strictly the profile header **"Message"** button. Completely avoids comment inputs, like buttons, or post boxes.
 * **Isolated Multi-Account Sandboxes**: Manage unlimited Facebook accounts with isolated user profiles. Delete an account to instantly wipe its sandbox data from disk.
 * **Direct Non-Friend Fallback**: Handles URL parameters, complex profile formats, and direct thread fallbacks (`/messages/t/<id>`).
