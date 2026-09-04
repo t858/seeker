@@ -24,10 +24,11 @@ Open your **Terminal** and run:
 git clone https://github.com/t858/seeker.git
 cd seeker
 ./install.sh
+npm start
 ```
 
 > **What happens during installation?**  
-> `install.sh` automatically installs core dependencies, configures the anti-detection sandbox engine, and registers **Seeker** as a native application (`/Applications/Seeker.app` on macOS or desktop launcher on Linux).
+> `install.sh` automatically installs core dependencies, configures the anti-detection sandbox engine, and registers **Seeker** as a native application (`/Applications/Seeker.app` on macOS or desktop launcher on Linux). Running `npm start` opens the application for the first time.
 
 ---
 
@@ -39,24 +40,25 @@ Open **Command Prompt** or **PowerShell** and run:
 git clone https://github.com/t858/seeker.git
 cd seeker
 install.bat
+npm start
 ```
 
-> `install.bat` configures all dependencies and creates direct shortcuts in your **Start Menu** and on your **Desktop**.
+> `install.bat` configures all dependencies, verifies the desktop engine, and creates direct shortcuts in your **Start Menu** and on your **Desktop**. Running `npm start` opens the application for the first time.
 
 ---
 
-## 🎯 How to Open Seeker (No Terminal Needed!)
+## 🎯 How to Reopen Seeker Afterwards (No Terminal Needed!)
 
-Once the installation above is complete, **you do NOT need to use the terminal again**.
+Once the first-time launch is complete, **you do NOT need to use the terminal again**.
 
 ### 🍏 On macOS:
 1. Press <kbd>Cmd</kbd> + <kbd>Space</kbd> to open **Spotlight** (or open **Launchpad** / **Applications**).
 2. Type **`Seeker`** and press <kbd>Enter</kbd>.
-3. **Seeker** will launch automatically, run a 5-second cinematic build-up animation, and open the full automation dashboard.
+3. **Seeker** will launch automatically with the 5-second cinematic build-up animation and open the full automation dashboard.
 
 ### 🪟 On Windows:
-1. Press <kbd>Windows</kbd> key or open the **Start Menu**.
-2. Type **`Seeker`** and click the application icon.
+1. Open your **Start Menu** or search **`Seeker`**.
+2. Click the **Seeker** icon (or double-click the **Seeker** shortcut on your Desktop).
 
 ### 🐧 On Linux:
 1. Open your **Application Launcher** and click **`Seeker`**.

@@ -43,9 +43,12 @@ echo.
 echo ======================================================
 echo  [SUCCESS] SEEKER INSTALLATION COMPLETE!
 echo.
-echo  HOW TO OPEN SEEKER:
-echo     1. Open your Windows Start Menu or search "Seeker".
-echo     2. Click "Seeker" to launch directly without opening terminal!
+echo  🚀 FIRST TIME LAUNCH:
+echo     Run: npm start
+echo.
+echo  💡 SUBSEQUENT LAUNCHES (No terminal needed!):
+echo     1. Search "Seeker" in your Windows Start Menu.
+echo     2. Or click the "Seeker" shortcut on your Desktop!
 echo ======================================================
 echo.
 pause
