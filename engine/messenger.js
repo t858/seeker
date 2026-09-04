@@ -273,14 +273,29 @@ async function checkForFailureBanners(page) {
 }
 
 /**
+ * Calculates a unique, deterministic port for each isolated sandbox account
+ * to prevent CDP session cross-talk between multiple accounts.
+ */
+function getAccountPort(sandboxDir) {
+  let hash = 0;
+  const str = String(path.basename(sandboxDir) || 'default');
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return 9225 + (Math.abs(hash) % 500);
+}
+
+/**
  * Launches an isolated sandbox Chrome instance on a dedicated debugging port.
  * Fully cross-platform across macOS, Windows, and Linux.
  */
-async function launchSandboxBrowser(sandboxDir, port = 9225) {
+async function launchSandboxBrowser(sandboxDir, customPort = null) {
   if (!fs.existsSync(sandboxDir)) {
     fs.mkdirSync(sandboxDir, { recursive: true });
   }
 
+  const port = customPort || getAccountPort(sandboxDir);
   const chromeExecutable = getChromeExecutablePath();
 
   const chromeArgs = [
@@ -326,7 +341,7 @@ async function launchSandboxBrowser(sandboxDir, port = 9225) {
     });
   });
 
-  return { browser, context, child };
+  return { browser, context, child, port };
 }
 
 /**

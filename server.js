@@ -243,7 +243,16 @@ app.post('/api/accounts/:id/reset', (req, res) => {
 // 3. Launch Interactive Sandbox Browser for Login
 app.post('/api/accounts/:id/login', async (req, res) => {
   const { id } = req.params;
-  const accounts = getAccounts();
+  let accounts = getAccounts();
+
+  // Automatically activate the account being launched
+  accounts = accounts.map((a) => ({
+    ...a,
+    active: a.id === id,
+  }));
+  saveAccounts(accounts);
+  broadcast('accounts_updated', accounts);
+
   const targetAcc = accounts.find((a) => a.id === id) || getActiveAccount();
   const sDir = targetAcc.sandboxDir || path.join(SANDBOXES_ROOT, targetAcc.id);
 
@@ -256,7 +265,7 @@ app.post('/api/accounts/:id/login', async (req, res) => {
     page.setDefaultNavigationTimeout(90000);
 
     await page.goto('https://www.facebook.com', { waitUntil: 'domcontentloaded' }).catch(() => {});
-    broadcast('log', `👉 Sandbox window open. Please log into Facebook for "${targetAcc.name}".`);
+    broadcast('log', `👉 Sandbox window open on dedicated port. Please log into Facebook for "${targetAcc.name}".`);
 
     // Listen for login completion
     const checkLogin = setInterval(async () => {

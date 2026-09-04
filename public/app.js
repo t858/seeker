@@ -146,6 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Needs Login
              </span>`;
 
+        const activeBadgeOrBtn = acc.active
+          ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              ⭐ Active Sender
+            </span>`
+          : `<button class="select-acc-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition" data-id="${acc.id}" title="Set as current active sending account">
+              ⭐ Set Active
+            </button>`;
+
         return `
           <tr class="hover:bg-slate-900/50 transition">
             <td class="py-3 px-4">
@@ -154,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
             <td class="py-3 px-4">${statusBadge}</td>
             <td class="py-3 px-4 text-right space-x-2">
+              ${activeBadgeOrBtn}
               <button class="launch-acc-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 border border-blue-500/30 transition" data-id="${acc.id}" title="Launch isolated sandbox browser for this account">
                 🚀 Launch
               </button>
@@ -170,6 +179,13 @@ document.addEventListener('DOMContentLoaded', () => {
       .join('');
 
     // Attach actions in modal table
+    document.querySelectorAll('.select-acc-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        await fetch(`/api/accounts/${btn.dataset.id}/select`, { method: 'POST' });
+        await loadAccounts();
+      });
+    });
+
     document.querySelectorAll('.launch-acc-btn').forEach((btn) => {
       btn.addEventListener('click', () => launchAccountSandbox(btn.dataset.id));
     });
@@ -223,8 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!res.ok) throw new Error(data.error);
 
       newAccountInput.value = '';
+      // Automatically switch to the newly created account
+      await fetch(`/api/accounts/${data.id}/select`, { method: 'POST' });
       await loadAccounts();
-      appendLog(`👤 Created new sandbox account: "${data.name}". Launch the sandbox browser to log in.`);
+      appendLog(`👤 Created & selected new active account: "${data.name}". Launch sandbox browser to log in.`);
     } catch (err) {
       alert(`Error creating account: ${err.message}`);
     }
@@ -232,6 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function launchAccountSandbox(id) {
     try {
+      // Also switch active sender to this account
+      await fetch(`/api/accounts/${id}/select`, { method: 'POST' });
+      await loadAccounts();
       appendLog(`🚀 Launching sandbox browser for account...`);
       const res = await fetch(`/api/accounts/${id}/login`, { method: 'POST' });
       const data = await res.json();
