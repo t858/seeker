@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Sandbox and user session profiles (contains cookies and active logins)
+sandboxes/
+browser_profile/
+browser_profiles/
+firefox_profile/
+data/history.json
+
+# Build and temporary files
+dist/
+build/
+assets/Seeker.iconset/
+*.log
+.DS_Store
+Thumbs.db

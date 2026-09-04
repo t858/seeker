@@ -1,0 +1,28 @@
+{
+  "name": "seeker",
+  "productName": "Seeker",
+  "version": "1.0.0",
+  "description": "Seeker — Automated Messenger Studio & Sandbox Dispatcher",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "app": "electron .",
+    "server": "node server.js",
+    "install:app": "bash scripts/install-app.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "playwright": "^1.62.1",
+    "puppeteer-core": "^25.9.0",
+    "ws": "^8.21.3"
+  },
+  "devDependencies": {
+    "electron": "^44.2.0"
+  }
+}
