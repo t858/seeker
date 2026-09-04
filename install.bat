@@ -30,6 +30,12 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo.
+echo [*] Verifying Electron runtime engine...
+if exist "%SCRIPT_DIR%node_modules\electron\install.js" (
+    call node "%SCRIPT_DIR%node_modules\electron\install.js"
+)
+
+echo.
 echo [*] Registering Windows Start Menu and Desktop shortcuts...
 call "%SCRIPT_DIR%scripts\install-app.bat"
 
