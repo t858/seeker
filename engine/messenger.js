@@ -500,7 +500,18 @@ async function sendFacebookMessage({
 
     // 5. Type and send message
     log('✍️ Focusing chat box and typing message...');
-    await chatInput.click();
+    try {
+      await chatInput.evaluate((el) => {
+        el.focus();
+        el.click();
+      });
+    } catch {
+      try {
+        await chatInput.focus();
+      } catch {
+        await chatInput.click({ force: true, timeout: 3000 });
+      }
+    }
     await sleep(300);
 
     await page.keyboard.type(message, { delay: typingDelay });
